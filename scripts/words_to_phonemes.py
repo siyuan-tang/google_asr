@@ -1,3 +1,4 @@
+
 class PronunciationDict:
 
     words_to_phonemes = dict()
@@ -37,54 +38,19 @@ class PronunciationDict:
                 pron_dict[word] = phonemes
         return pron_dict
 
+
     def get_phonemes(self, sentence):
         """Convert sentence string into a list of phonemes"""
         words = sentence.split()
         # Make phonemes as a list of list (i.e separate list for each word)
-        phonemes = [self.words_to_phonemes[w.upper()] for w in words]
+        # for w in words:
+        phonemes = []
+        for w in words:
+            try:
+                phoneme = [self.words_to_phonemes[w.upper()]]
+            except(KeyError):
+                phoneme = [[w]]
+            phonemes.append(phoneme)
         # Flatten into a single list
-        phonemes = [item for sublist in phonemes for item in sublist]
+        phonemes = [phon for sublist in phonemes for item in sublist for phon in item]
         return phonemes
-
-
-def main():
-
-    # Firt make a pronuncation dictionary object using the 'beep-1.0' file.
-    # The file needs to be in the same directory as the python code.
-    pron_dict = PronunciationDict("beep-1.0")
-
-    # We can now use the dictionary to convert sentences into lists of phonemes.
-
-    # Convert a sentence into phonemes
-    sentence = "This is a sentence that we want to convert into a list of phonemes"
-    phonemes = pron_dict.get_phonemes(sentence)
-    print(sentence)
-    print(phonemes)
-
-    # Convert a word into phonemes
-    word = "bin"
-    phonemes = pron_dict.get_phonemes(word)
-    print(word)
-    print(phonemes)
-
-    # Check that all the alphabet letters work
-    sentence = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
-    phonemes = pron_dict.get_phonemes(sentence)
-    print("Letters")
-    print(phonemes)
-
-    # Check that all the numbers work
-    sentence = "0 1 2 3 4 5 6 7 8 9"
-    phonemes = pron_dict.get_phonemes(sentence)
-    print("Numbers:")
-    print(phonemes)
-
-    # Check that it works for a grid like sentence
-    sentence = "Bin blue at P 6 now"
-    phonemes = pron_dict.get_phonemes(sentence)
-    print(sentence)
-    print(phonemes)
-
-
-if __name__ == "__main__":
-    main()

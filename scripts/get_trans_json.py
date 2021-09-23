@@ -16,8 +16,8 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/tsy/Desktop/google/quicks
 bucket_name = "grid_bucket_1"
 project_id = "hale-boulevard-318911"
 location = "global"
-audio_fpath = "/Users/tsy/Desktop/study/Dissertation/grid_audio/audio_25k_sampled/*/*.wav"
-output_dir = "/Users/tsy/Desktop/google/shilin/data_a1"
+audio_fpath = "/Users/tsy/Desktop/study/Dissertation/grid_audio/sample/*/*.wav"
+output_dir = "/Users/tsy/Desktop/google/shilin/data/adaptation"
 
 with open("phrase_set.json", "r") as z:
     phrases = json.load(z)
@@ -92,6 +92,28 @@ def run_asr(speech_file):
         }
     )
     prep=class_prep.name
+
+    # class_alpha = adaptation_client.create_custom_class(
+    #     {
+    #         "parent": parent,
+    #         "custom_class_id": str(uuid.uuid4())[:8],
+    #         "custom_class": {
+    #             "items": [{"value": "$OOV_CLASS_ALPHA_SEQUENCE"}]
+    #         },
+    #     }
+    # )
+    # alpha=class_alpha.name
+    #
+    # class_digit = adaptation_client.create_custom_class(
+    #     {
+    #         "parent": parent,
+    #         "custom_class_id": str(uuid.uuid4())[:8],
+    #         "custom_class": {
+    #             "items": [{"value": "$OOV_CLASS_ALPHA_SEQUENCE"}]
+    #         },
+    #     }
+    # )
+    # digit=class_digit.name
 
     class_adverb = adaptation_client.create_custom_class(
         {
@@ -232,9 +254,9 @@ def run_asr(speech_file):
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=25000,
         language_code="en-GB",
-        # adaptation=speech_adaptation,
-        adaptation=speech_adaptation1,
-        # adaptation=speech_adaptation2,
+        adaptation=speech_adaptation,
+        # adaptation=speech_adaptation1,
+        # adaptation=speech_adaptation2,  # not work well
         # speech_contexts=[speech_context0, speech_context4, speech_context5, speech_context6],
         # speech_contexts=[speech_context1, speech_context2, speech_context3, speech_context4, speech_context5,speech_context6],
         max_alternatives=3,
