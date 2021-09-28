@@ -1,21 +1,21 @@
 import pandas as pd
 
 
-transcript_path = "/Users/tsy/Desktop/google/shilin/csv/adaptation/gender/test_female.csv"
-output_path = "/Users/tsy/Desktop/google/shilin/csv/adaptation/gender/test_result_female.csv"
+transcript_path = "/Users/tsy/Desktop/google/google_asr/csv/adaptation/gender/test_female.csv"
+output_path = "/Users/tsy/Desktop/google/google_asr/csv/adaptation/gender/test_result_female.csv"
 
 df = pd.read_csv(transcript_path)
 lines=[]
 
-threshold = 0.8
-while 0.7 < threshold <= 0.81:
+threshold = 0.75
+while 0.7 < threshold <= 1:
 
     # reject percentage
-    reject = df[df['min_word_confidence'] < threshold].shape[0]
+    reject = df[df['sentence_confidence'] < threshold].shape[0]
     rej_percents = reject / df.shape[0]
 
-    accept = df[df['min_word_confidence'] > threshold]['wer'].to_list()
-    accept_p = df[df['min_word_confidence'] > threshold]['per'].to_list()
+    accept = df[df['sentence_confidence'] > threshold]['wer'].to_list()
+    accept_p = df[df['sentence_confidence'] > threshold]['per'].to_list()
 
     # average accepted WER:
     if len(accept) != 0:

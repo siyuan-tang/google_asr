@@ -17,7 +17,7 @@ bucket_name = "grid_bucket_1"
 project_id = "hale-boulevard-318911"
 location = "global"
 audio_fpath = "/Users/tsy/Desktop/study/Dissertation/grid_audio/sample/*/*.wav"
-output_dir = "/Users/tsy/Desktop/google/shilin/data/adaptation"
+output_dir = "/Users/tsy/Desktop/google/google_asr/data/adaptation"
 
 with open("phrase_set.json", "r") as z:
     phrases = json.load(z)

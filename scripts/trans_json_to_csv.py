@@ -6,8 +6,8 @@ import jiwer
 from ground_truth import filename_to_sentence
 from words_to_phonemes import PronunciationDict
 
-transcript_path = "/Users/tsy/Desktop/google/shilin/data/adaptation/female/*/*.json"
-output_path = "/Users/tsy/Desktop/google/shilin/csv/adaptation/gender/test_female.csv"
+transcript_path = "/Users/tsy/Desktop/google/google_asr/data/adaptation/female/*/*.json"
+output_path = "/Users/tsy/Desktop/google/google_asr/csv/adaptation/gender/test_female.csv"
 pron_dict = PronunciationDict("beep-1.0")
 
 def clean_hyp(hyp):
